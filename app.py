@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Configuration de la base de données MySQL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://seahawks_user:motdepasse@192.168.100.231/seahawks_nester'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://seahawks_user:P@ssw0rd@192.168.100.231/seahawks_nester'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialisation de SQLAlchemy
@@ -26,6 +26,11 @@ class Sonde(db.Model):
     latence = db.Column(db.String(50))
     version = db.Column(db.String(50))
     machines_connectees = db.Column(db.Integer)
+
+@app.route('/')
+def index():
+    return "<h1>Bienvenue sur Seahawks Nester !</h1><p>L'application est en ligne.</p>"
+
 
 # Route pour recevoir les données POST depuis les sondes
 @app.route('/api/v1/receive_data', methods=['POST'])
