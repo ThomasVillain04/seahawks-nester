@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Configuration de la base de données MySQL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://seahawks_user:TON_MOT_DE_PASSE@192.168.100.231/seahawks_nester'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://seahawks_user:P@ssw0rd@192.168.100.231/seahawks_nester'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialisation de la BDD
