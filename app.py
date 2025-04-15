@@ -28,7 +28,7 @@ class Sonde(db.Model):
     machines_connectees = db.Column(db.Integer)
 
 @app.route('/')
-def afficher_sondes():
+def index():
     sondes = Sonde.query.order_by(Sonde.date_reception.desc()).all()
     return render_template('sondes.html', sondes=sondes)
 
