@@ -1,33 +1,41 @@
-<!-- templates/sondes.html -->
-<html>
-  <head>
-    <title>Sondes reçues</title>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Seahawks Nester – Tableau de bord</title>
     <style>
-      body { font-family: Arial; padding: 20px; }
-      table { border-collapse: collapse; width: 100%; }
-      th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-      th { background-color: #f2f2f2; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ccc; }
+        th { background-color: #f0f0f0; }
     </style>
-  </head>
-  <body>
-    <h1>Données des sondes 🛰️</h1>
+</head>
+<body>
+    <h1>Tableau de bord – Données des sondes</h1>
     <table>
-      <tr>
-        <th>ID</th>
-        <th>IP Locale</th>
-        <th>Machines connectées</th>
-        <th>Scan</th>
-        <th>Reçu le</th>
-      </tr>
-      {% for sonde in sondes %}
-      <tr>
-        <td>{{ sonde.id }}</td>
-        <td>{{ sonde.local_ip }}</td>
-        <td>{{ sonde.connected_machines }}</td>
-        <td><pre>{{ sonde.scan_result }}</pre></td>
-        <td>{{ sonde.date_reception.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-      </tr>
-      {% endfor %}
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Adresse IP</th>
+                <th>Machines connectées</th>
+                <th>Résultat du scan</th>
+                <th>Date de réception</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if sondes %}
+                {% for sonde in sondes %}
+                <tr>
+                    <td>{{ sonde.id }}</td>
+                    <td>{{ sonde.local_ip }}</td>
+                    <td>{{ sonde.connected_machines }}</td>
+                    <td><pre>{{ sonde.scan_result }}</pre></td>
+                    <td>{{ sonde.date_reception.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="5">Aucune donnée de sonde reçue pour le moment.</td></tr>
+            {% endif %}
+        </tbody>
     </table>
-  </body>
+</body>
 </html>
