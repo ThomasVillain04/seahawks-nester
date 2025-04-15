@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from datetime import datetime
@@ -28,8 +28,9 @@ class Sonde(db.Model):
     machines_connectees = db.Column(db.Integer)
 
 @app.route('/')
-def index():
-    return "<h1>Bienvenue sur Seahawks Nester !</h1><p>L'application est en ligne.</p>"
+def afficher_sondes():
+    sondes = Sonde.query.order_by(Sonde.date_reception.desc()).all()
+    return render_template('sondes.html', sondes=sondes)
 
 
 # Route pour recevoir les données POST depuis les sondes
