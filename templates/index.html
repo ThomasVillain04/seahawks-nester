@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Seahawks Nester - Tableau de bord</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Tableau de bord des sondes</h1>
+    {% if sondes %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Nom VM</th>
+            <th>Connectée</th>
+            <th>Latence</th>
+            <th>Version</th>
+            <th>Machines connectées</th>
+            <th>Reçu le</th>
+        </tr>
+        {% for sonde in sondes %}
+        <tr>
+            <td>{{ sonde.id }}</td>
+            <td>{{ sonde.ip }}</td>
+            <td>{{ sonde.vm_name }}</td>
+            <td>{{ '✅' if sonde.connectee else '❌' }}</td>
+            <td>{{ sonde.latence }}</td>
+            <td>{{ sonde.version }}</td>
+            <td>{{ sonde.machines_connectees }}</td>
+            <td>{{ sonde.date_reception.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>Aucune sonde connectée ou la base de données est inaccessible.</p>
+    {% endif %}
+</body>
+</html>
