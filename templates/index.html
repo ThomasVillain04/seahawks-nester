@@ -11,14 +11,14 @@
         pre { text-align: left; }
     </style>
     <script>
-      // Auto-refresh toutes les 30 secondes
+      // Rafraîchit la page toutes les 30 secondes
       setTimeout(() => {
         location.reload();
       }, 30000);
     </script>
 </head>
 <body>
-    <h1>Tableau de bord - Sondes connectées 🛰️</h1>
+    <h1>Tableau de bord - Sondes 🛰️</h1>
 
     {% if sondes %}
     <table>
@@ -51,14 +51,20 @@
                 <td>{{ sonde.latence }}</td>
                 <td>{{ sonde.version }}</td>
                 <td>{{ sonde.machines_connectees }}</td>
-                <td><pre>{{ sonde.scan_result }}</pre></td>
+                <td>
+                    {% if sonde.scan_result %}
+                        <a href="/scan/{{ sonde.id }}" target="_blank">Voir le scan</a>
+                    {% else %}
+                        Aucun scan
+                    {% endif %}
+                </td>
                 <td>{{ sonde.date_reception.strftime('%Y-%m-%d %H:%M:%S') }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-        <p>Aucune sonde connectée ou aucune donnée reçue.</p>
+        <p>Aucune donnée de sonde reçue pour l’instant.</p>
     {% endif %}
 </body>
 </html>

@@ -58,5 +58,14 @@ def receive_data():
         print("❌ Erreur :", e)
         return jsonify({"status": "error", "details": str(e)}), 500
 
+# Nouvelle route pour voir un scan précis
+@app.route('/scan/<id>')
+def afficher_scan(id):
+    sonde = Sonde.query.get(id)
+    if sonde and sonde.scan_result:
+        return f"<pre>{sonde.scan_result}</pre>"
+    else:
+        return "Aucun scan disponible pour cette sonde.", 404
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
