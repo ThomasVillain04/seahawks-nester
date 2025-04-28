@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # ⚙️ Configuration MySQL (modifie user/mdp/IP au besoin)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://seahawks_user:P@ssw0rd@192.168.100.231/seahawks_nester'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://seahawks_user:P%40ssw0rd@192.168.100.231/seahawks_nester'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # 📦 Base de données
